@@ -11,8 +11,17 @@ router.get('/', function(req, res, next) {
   });
 });
 
-router.post('/create', function(req, res) {
+router.get('/new', function(req, res, next) {
+	res.render('users/new');
+});
 
+router.post('/create', function(req, res) {
+	models.User.create({
+		name: req.body.name,
+		age: req.body.age
+	}).then(function() {
+		res.redirect('/users');
+	});
 });
 
 
