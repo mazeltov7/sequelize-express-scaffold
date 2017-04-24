@@ -18,6 +18,9 @@
 	    		<tr>
 	    			<td><%= value.name %></td>
 	    			<td><%= value.age %></td>
+	    			<td><a href="/users/<%= value.id %>">Show</a></td>
+	    			<td><a href="/users/<%= value.id %>/edit">Edit</a></td>
+	    			<td><a href="/users/<%= value.id %>">Delete</a></td>
 	    		</tr>
     	<% }); %>
     	</table>
