@@ -20,7 +20,12 @@
 	    			<td><%= value.age %></td>
 	    			<td><a href="/users/<%= value.id %>">Show</a></td>
 	    			<td><a href="/users/<%= value.id %>/edit">Edit</a></td>
-	    			<td><a href="/users/<%= value.id %>">Delete</a></td>
+	    			<td>
+              <form name="delete<%= value.id %>" action="/users/<%= value.id %>?_method=delete" method="post">
+                <input type="hidden" name="userId" value="<%= value.id %>">
+                <a href="#" onclick="document.delete<%= value.id %>.submit()">Delete</a>
+              </form>
+            </td>
 	    		</tr>
     	<% }); %>
     	</table>
