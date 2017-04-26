@@ -1,15 +1,15 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
-  var User = sequelize.define('User', {
-    name: DataTypes.STRING,
-    age: DataTypes.INTEGER
+  var Comment = sequelize.define('Comment', {
+    content: DataTypes.TEXT,
+    user_id: DataTypes.INTEGER
   }, {
     classMethods: {
       associate: function(models) {
         // associations can be defined here
-        User.hasMany(models.Comment, {'foreignKey': 'user_id'})
+        Comment.belongsTo(models.User, {'foreignKey': 'user_id'})
       }
     }
   });
-  return User;
+  return Comment;
 };

@@ -7,6 +7,7 @@
   <body>
     <h1>Sequelize Express</h1>
     <p>this is Show page!!</p>
+    <h3>Basic Info</h3>
     <p>Name: <%= user.name %></p>
     <p>Age: <%= user.age %></p>
     <a href="/users">Back</a>
@@ -15,5 +16,20 @@
       <input type="hidden" name="userId" value="<%= user.id %>">
       <a href="#" onclick="document.delete<%= user.id %>.submit()">Delete</a>
     </form>
+
+    <h3>Commets</h3>
+    <form action="/users/<%= user.id %>/comments/create" method="post">
+      <input type="text" name="content">
+      <button type="submit">Submit</button>
+    </form>
+
+    <% if (comments) { %>
+      <ul>
+        <% comments.forEach(function(value, key) { %>
+          <li><%= value.content %></li>
+        <% }) %>
+      </ul>
+    <% } %>
+
   </body>
 </html>

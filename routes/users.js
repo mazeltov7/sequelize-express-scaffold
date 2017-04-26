@@ -28,9 +28,15 @@ router.post('/create', function(req, res) {
 // show
 router.get('/:user_id', function(req, res) {
 	models.User
-		.findOne({where: {id: req.params.user_id}})
-		.then(function(result) {
-			res.render('users/show', {user: result});
+		.findOne({
+			where: {id: req.params.user_id}
+		}, {
+			include: [ models.Comment]
+		})
+		.then(function(userResult) {
+			userResult.getComments().then(function(commentResults) {
+				res.render('users/show', {user: userResult, comments: commentResults});
+			})
 		});
 });
 
@@ -70,6 +76,17 @@ router.delete('/:user_id', function(req, res) {
 		});
 });
 
+// create(comment)
+router.post('/:user_id/comments/create', function(req, res) {
+	models.Comment.create({
+		content: req.body.content,
+		user_id: req.params.user_id
+	}).then(function() {
+		res.redirect(`/users/${req.params.user_id}`);
+	})
+})
+
+// destroy(comment)
 
 
 module.exports = router;
